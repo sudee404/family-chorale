@@ -1,0 +1,156 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block banner%}
+<section class="banner_section">
+    <div class="banner-main">
+        <img src="{%static 'images/banner2.jpg'%}" />
+        <div class="container">
+
+            <div class="text-bg relative">
+                <h1><br><span class="Perfect">Family Chorale</span><br>Welcome To True Gospel Music</h1>
+                <p>We offer you great gospel music for various prayer and worship occassions
+                    <br> To view available songs click below
+                </p>
+                <a href="{%url 'music'%}">View Songs</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+{%endblock%}
+{%block body%}
+<!-- music-box  -->
+<div class="music-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                <div class="for-box">
+                    <i><a href=""><img src="{%static 'icon/icon1.png'%}" alt="icon" /></a></i>
+                    <h3>Get Songs</h3>
+                    <p>Listen to and download available songs from our platform </p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                <div class="for-box">
+                    <i><img src="{%static 'icon/icon2.png'%}" alt="icon" /></i>
+                    <h3>Attend Events</h3>
+                    <p>Attend planned events either as a member or just a concerned party and great fan of the group
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                <div class="for-box">
+                    <i><img src="{%static 'icon/icon3.png'%}" alt="icon" /></i>
+                    <h3>Customised Playlist</h3>
+                    <p>Get customised playlists in form of albums organised to your fulfillment </p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                <div class="for-box">
+                    <i><img src="{%static 'icon/icon4.png'%}" alt="icon" /></i>
+                    <h3>Picture Gallery</h3>
+                    <p>View a gallery of the groups pictures taken ata various events
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end music-box  -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 padding">
+            <div class="img-box">
+                <figure><img src="{%static 'images/musicbg.jpg'%}" alt="img" /></figure>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 padding">
+            <div class="text-box">
+                <div class="box">
+                    <i><img src="{%static 'images/5.png'%}" /></i>
+                    <h3>MEET OUR Leaders</h3>
+                    <p>Meet past and current leaders of this singing group
+                        <br>
+
+                    </p>
+                    <a href="{%url 'leader'%}">Learn More!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Download -->
+<div id="screenshot" class="Lastestnews">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Latest Events</h2>
+                    <span>The following display all our upcoming events over the course of the year <br>Check to see the
+                        specified dates and do not miss </span>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {%for event in events%}
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+                <div class="news-box">
+                    <figure><img src="{{event.poster.url}}" alt="img" /></figure>
+                    <h3>{{event.title}}</h3>
+                    <span> {{event.date}}</span><span>Time : {{event.time}} hours</span>
+                    <p>{{event.description|safe}}</p>
+                    <p>At {{event.location}}</p>
+                </div>
+            </div>
+            {%endfor%}
+            
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <a class="btn btn-primary btn-lg" href="{%url 'events'%}" role="button">View More!</a>
+        </div>
+    </div>
+</div>
+<!-- end Download -->
+
+<!-- Albums -->
+<div id="screenshot" class="Albums">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Photo Album </h2>
+                    <span>View group pictures taken on variuos events and occasions <br>Become a member to earn a spot
+                        on this photo album</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {%for pic in pics%}
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 margin">
+                <div class="Albums-box">
+                    <figure>
+                        <a href="{{pic.picture.url}}" class="fancybox" rel="ligthbox">
+                            <img src="{{pic.picture.url}}" class="zoom img-fluid " alt="">
+                        </a>
+                        <span class="hoverle">
+                    <a href="{{pic.picture.url}}" class="fancybox" rel="ligthbox"><img src="{%static 'images/search.png'%}"></a>
+                    </span>
+                    </figure>
+                </div>
+            </div>
+            {%endfor%}           
+
+        </div>
+        <div class="row justify-content-center">
+            <a class="btn btn-primary btn-lg" href="{%url 'gallery'%}" role="button">View More!</a>
+        </div>
+    </div>
+</div>
+<!-- end Albums -->
+
+
+{%endblock%}

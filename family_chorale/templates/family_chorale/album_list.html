@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block nav%}
+<ul class="menu-area-main">
+    <li> <a href="{%url 'index'%}">Home</a> </li>
+    <li class="active"> <a href="{%url 'songs'%}"> Songs</a> </li>
+    <li> <a href="{%url 'events'%}">Events</a> </li>
+    <li> <a href="{%url 'recruit'%}">Recruitment</a> </li>
+    <li> <a href="{%url 'leader'%}">Leadership</a> </li>
+    <li> <a href="{%url 'gallery'%}">Gallery</a> </li>
+</ul>
+{%endblock%}
+{%block banner%}
+<div class="blogbg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blogtitlepage">
+                    <h2>Songs</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}
+{%block body%}
+<!-- Lastestnews -->
+<div class="Lastestnews blog">
+    <div class="container">
+        <div class="row">
+            {%if album_list%}
+            {%for album in album_list%}
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 h-100 margin">
+                <div class="news-box">
+                    <figure><img src="{{album.album_art.url|default_if_none:'#'}}" alt="img" /></figure>
+                    <h3>{{album.name}}</h3>
+                    <span> {{album.release_date}}</span><span><a href="{{album.get_absolute_url}}" class="btn btn-danger btn-sm btn-outline-warning">View album</a></span>
+                    <p>{{album.detail}}</p>
+                </div>
+            </div>
+            {%endfor%}
+            {%endif%}
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+<!-- end Albums -->
+
+{%endblock%}

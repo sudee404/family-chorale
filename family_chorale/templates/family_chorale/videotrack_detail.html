@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block nav%}
+<ul class="menu-area-main">
+    <li> <a href="{%url 'index'%}">Home</a> </li>
+    <li class="active"> <a href="{%url 'songs'%}"> Songs</a> </li>
+    <li> <a href="{%url 'events'%}">Events</a> </li>
+    <li> <a href="{%url 'recruit'%}">Recruitment</a> </li>
+    <li> <a href="{%url 'leader'%}">Leadership</a> </li>
+    <li> <a href="{%url 'gallery'%}">Gallery</a> </li>
+</ul>
+{%endblock%}
+{%block banner%}
+<div class="blogbg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blogtitlepage">
+                    <h2>Videos</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}
+{%block body%}
+<br>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="embed-responsive embed-responsive-16by9">
+                
+                {%if videotrack.link%}
+                {{videotrack.link|safe}}
+                {%else%}
+                <video src="{{videotrack.video.url}}" type="video/mpeg" controls>
+                    <p>Your browser doesn't support HTML5 audio.</p>
+                </video>
+                {%endif%}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="jumbotron jumbotron-fluid">
+                <h1 class="display-5">{{videotrack.name}}</h1>
+                <p class="lead">{{videotrack.album}}</p>
+                <hr class="my-4">
+                <p>Click Below to download this video</p>
+                <br>
+                <a  type="button" class="btn btn-primary" href="{{videotrack.video.url}}" download>Download
+                    
+                  </a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

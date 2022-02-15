@@ -1,0 +1,124 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block nav%}
+<ul class="menu-area-main">
+    <li> <a href="{%url 'index'%}">Home</a> </li>
+    <li> <a href="{%url 'songs'%}"> Songs</a> </li>
+    <li class="active"> <a href="{%url 'events'%}">Events</a> </li>
+    <li> <a href="{%url 'recruit'%}">Recruitment</a> </li>
+    <li> <a href="{%url 'leader'%}">Leadership</a> </li>
+    <li> <a href="{%url 'gallery'%}">Gallery</a> </li>
+</ul>
+{%endblock%}
+{%block banner%}
+<div class="blogbg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blogtitlepage">
+                    <h2>Events Calender</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}
+{%block body%}
+<br>
+{%if event_list%}
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5">Upcoming Events</h1>
+            <hr class="my-2">
+            <p>Book Events</p>
+            <p class="lead">
+            <table class="table table-striped table-inverse">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Booking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for event in event_list%}
+                    <tr>
+                        <td scope="row">{{event.title}}</td>
+                        <td>{{event.date}}</td>
+                        <td>{{event.time}}</td>
+                        <td>{{event.location}}</td>
+                        <td>{%if event.expired%}<a type="button" data-toggle="modal"
+                            data-target="#ev{{event.pk}}"
+                            class="btn btn-warning btn-outline-danger btn-sm disabled">Expired</a>
+                            {%else%}
+                            <a type="button" data-toggle="modal"
+                                data-target="#ev{{event.pk}}"
+                                class="btn btn-warning btn-outline-danger btn-sm">Attend</a>
+                            {%endif%}</td>
+                    </tr>
+                    <div class="modal fade" id="ev{{event.pk}}" tabindex="-1" role="dialog"
+                        aria-labelledby="ev{{event.pk}}-label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ev{{event.pk}}Title">{{event.title}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <img class="img-fluid" src="{{event.poster.url}}" alt="Poster">
+                                        </div>
+                                        <div class="col-12">
+                                            <p style="color:#f0f8ff">{{event.description|safe}}</p>
+                                        </div>
+                                        <div class="col-12" style="text-align:center;">
+                                            <br>
+
+                                            <button type="button" class="btn btn-primary btn-sm btn-outline-light" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">Book A Seat</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </tbody>
+            </table>
+
+            </p>
+        </div>
+    </div>
+</div>
+
+{%endif%}
+{%endblock%}
+<div class="modal fade" id="ev{{event.pk}}" tabindex="-1" role="dialog" aria-labelledby="ev{{event.pk}}-label"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ev{{event.pk}}Title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--Modal content-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

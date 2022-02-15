@@ -1,0 +1,69 @@
+{%extends 'base.html'%}
+{%load static%}
+{% load crispy_forms_tags %}
+{%block nav%}
+<ul class="menu-area-main">
+    <li> <a href="{%url 'index'%}">Home</a> </li>
+    <li> <a href="{%url 'songs'%}"> Songs</a> </li>
+    <li> <a href="{%url 'events'%}">Events</a> </li>
+    <li class="active"> <a href="{%url 'recruit'%}">Recruitment</a> </li>
+    <li> <a href="{%url 'leader'%}">Leadership</a> </li>
+    <li> <a href="{%url 'gallery'%}">Gallery</a> </li>
+</ul>
+{%endblock%}
+{%block banner%}
+<div class="blogbg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blogtitlepage">
+                    <h2>Recruitment</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}
+{%block body%}
+<br>
+<br>
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Become a Member</h1>
+            <p class="lead">Submit your details and we will reach you</p>
+            <hr class="my-2">
+            <p>At an appropriate time</p>
+            <div class="container">
+                <div class="row">
+                    <div class=" col-md-6 offset-md-3">
+                        <div class="address">
+        
+                            <form method="post">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{form.name|as_crispy_field}}
+                                    </div>
+                                    <div class="col-sm-12">
+                                        {{form.age|as_crispy_field}}
+                                    </div>
+                                    <div class="col-sm-12">
+                                        {{form.phone|as_crispy_field}}
+                                    </div>
+                                    {% csrf_token %}
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-success">Submit</button> 
+                                    </div>
+                                                                       
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,142 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block nav%}
+<ul class="menu-area-main">
+    <li> <a href="{%url 'index'%}">Home</a> </li>
+    <li class="active"> <a href="{%url 'songs'%}"> Songs</a> </li>
+    <li> <a href="{%url 'events'%}">Events</a> </li>
+    <li> <a href="{%url 'recruit'%}">Recruitment</a> </li>
+    <li> <a href="{%url 'leader'%}">Leadership</a> </li>
+    <li> <a href="{%url 'gallery'%}">Gallery</a> </li>
+</ul>
+{%endblock%}
+
+{%block banner%}
+<div class="blogbg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blogtitlepage">
+                    <h2>Music</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}
+{%block body%}
+<br>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Video</h1>
+        <p class="lead">All songs .</p>
+        <hr class="my-4">
+
+        {%if vids%}
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th colspan='2'>Track Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {%for track in vids%}
+                <tr>
+                    <td scope="row">{{track}}</td>
+                    <td><a href="{{track.get_absolute_url}}" class="btn btn-danger btn-outline-warning">View</a>
+                        <a href="{{track.get_absolute_url}}" type="button" data-toggle="modal"
+                            data-target="#vid{{track.pk}}" class="btn btn-outline-danger btn-warning">Play</a>
+                        <a href="{{track.video.url}}" class="btn btn-primary btn-outline-light">Download</a>
+                    </td>
+                </tr>
+                <div id="vid{{track.pk}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="my-modal-title">{{track.name}}</h5>
+                                <button class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body bg-dark">
+                                <p><video src="{{track.video.url}}" type="audio/mpeg" width="100%" height="auto" controls>
+                                    
+                                </video></p>
+                                <p>Album : {{track.album.name}}</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                {%endfor%}
+            </tbody>
+        </table>
+        {%else%}
+        <p class="lead">There are no video records for the current album</p>
+        {%endif%}
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Audio</h1>
+        {%if audios%}
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th colspan=2>Track Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {%for track in audios%}
+                <tr>
+                    <td scope="row">{{track}}</td>
+                    <td><a href="{{track.get_absolute_url}}" type="button" data-toggle="modal"
+                            data-target="#song{{track.pk}}" class="btn btn-danger btn-outline-warning">Play</a><span
+                            width='5em'> </span>
+                        <a type="button" class="btn btn-primary" href="{{track.audio.url}}"
+                            download="{{track.name}}">Download </a>
+                    </td>
+
+                </tr>
+                <div class="modal fade" id="song{{track.pk}}" tabindex="-1" role="dialog"
+                    aria-labelledby="song{{track.pk}}-label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="song{{track.pk}}Title">{{track.name}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body bg-dark">
+                                <audio controls>
+                                    <source src="{{track.audio.url}}" type="audio/mpeg">
+                                    <p>Your browser doesn't support HTML5 audio.</p>
+                                </audio>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {%endfor%}
+            </tbody>
+        </table>
+        {%else%}
+        <p class="lead">There are no audio records for the current album</p>
+        {%endif%}
+
+    </div>
+</div>
+
+
+{%endblock%}

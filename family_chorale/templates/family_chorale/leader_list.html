@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block nav%}
+<ul class="menu-area-main">
+    <li> <a href="{%url 'index'%}">Home</a> </li>
+    <li> <a href="{%url 'songs'%}"> Songs</a> </li>
+    <li> <a href="{%url 'events'%}">Events</a> </li>
+    <li> <a href="{%url 'recruit'%}">Recruitment</a> </li>
+    <li class="active"> <a href="{%url 'leader'%}">Leadership</a> </li>
+    <li> <a href="{%url 'gallery'%}">Gallery</a> </li>
+</ul>
+{%endblock%}
+{%block banner%}
+<div class="blogbg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blogtitlepage">
+                    <h2>Leaders</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}
+{%block body%}
+{%if leader_list%}
+<div class="Lastestnews blog">
+    <div class="container">
+        <div class="row justify-content-center">
+            {%for leader in leader_list%}
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 h-100 margin">
+                <div class="news-box">
+                    <figure><img class="img-responsive" src="{{leader.leaders_pic.url|default_if_none:'#'}}" alt="img"  /></figure>
+                    <h3>Name : {{leader.name}}</h3>
+                    <span>Started : {{leader.term_start}}</span><br>
+                    
+                    {%if leader.iscurrent%}
+                    <span>Current Chairperson</span>
+                    {%else%}
+                    <span>Ended : {{leader.term_end}}</span>
+                    {%endif%}
+                    <p>Age : {{leader.age}}</p>
+                    
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+</div>
+{%else%}
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">No records found</h1>
+
+        <hr class="my-4">
+        <p>There are no records in the database</p>
+    </div>
+</div>
+{%endif%}
+{%endblock%}
